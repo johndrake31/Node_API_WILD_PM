@@ -21,15 +21,17 @@ wilderController.readAll = function (req, res, next) {
             res.json({ success: false, result: err })
         })
 }
-wilderController.findByName = function (req, res, next) {
+
+wilderController.findById = function (req, res, next) {
     WilderModel
-        .findOne({ name: req.body.name })
+        .findOne({ _id: req.params.id })
         .then((result) => { res.json({ success: true, result: result }); })
         .catch((err) => {
             // res.send(err.message)
             res.json({ success: false, result: err })
         })
 }
+
 wilderController.update = function (req, res, next) {
     WilderModel
         .findOneAndUpdate({ _id: req.body._id }, req.body)
@@ -39,9 +41,11 @@ wilderController.update = function (req, res, next) {
             res.json({ success: false, result: err })
         })
 }
-wilderController.deleteByName = function (req, res, next) {
+
+wilderController.deleteById = function (req, res, next) {
+
     WilderModel
-        .deleteOne({ name: req.body.name }, req.body)
+        .deleteOne({ _id: req.params.id }, req.body)
         .then((result) => { res.json({ success: true, result: result }); })
         .catch((err) => {
             // res.send(err.message)

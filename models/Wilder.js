@@ -6,4 +6,5 @@ const WilderSchema = new Schema({
   city: String,
   skills: [{ title: String, votes: Number }],
 });
+
 module.exports = mongoose.model("wilder", WilderSchema);

@@ -13,11 +13,23 @@ mongoose
     .catch((err) => console.log(err));
 app.use(express.json())
 
+//read
+app.get('/', function(req,res,next){
+    res.send(
+        '<h1 style="color:red">THIS IS AN API</h1>'
+    )
+})
 app.get('/api/wilder/findall', wilderController.readAll)
-app.post('/api/wilder/findbyname', wilderController.findByName)
+app.get('/api/wilder/findbyid/:id', wilderController.findById)
+
+//create
 app.post('/api/wilder/create', wilderController.create)
+
+//update
 app.put('/api/wilder/updatebyid', wilderController.update)
-app.delete('/api/wilder/deletebyname', wilderController.deleteByName)
+
+//delete
+app.delete('/api/wilder/deletebyid/:id', wilderController.deleteById)
 
 app.listen(4000, function () {
     console.log('Server started');
