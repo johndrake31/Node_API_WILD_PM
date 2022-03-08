@@ -14,9 +14,20 @@ mongoose
 app.use(express.json())
 
 //read
-app.get('/', function(req,res,next){
+
+app.get('/', function (req, res, next) {
     res.send(
-        '<h1 style="color:red">THIS IS AN API</h1>'
+        `
+        <div width="400" height="400" style='padding: 25px; background-color: black'>
+            <h1 style="color:red">THIS IS AN API</h1>
+            <h2 style="color:white">Quelle est la couleur préférée d’un chat?</h2>
+            <hr>
+            <h3 style="color:white">Le rrrrrouge.</h3>
+            <br>
+            <br>
+            <br>
+        <div>
+        `
     )
 })
 app.get('/api/wilder/findall', wilderController.readAll)
