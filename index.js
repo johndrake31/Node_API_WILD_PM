@@ -20,8 +20,6 @@ app.get('/', (req, res, next) => {
 })
 
 app.use('/wilder', function (req, res, next) {
-    console.log(req.body);
-
     const firstWilder = new WilderModel({
         name: req.body.name,
         city: req.body.city,
@@ -30,7 +28,9 @@ app.use('/wilder', function (req, res, next) {
     firstWilder
         .save()
         .then(result => res.send(result))
-        .catch(err => console.log('error:', err))
+        .catch((err) =>  {
+            res.send(err.message)
+        })
 })
 
 app.listen(4000, function () {
