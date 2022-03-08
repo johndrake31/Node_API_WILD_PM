@@ -34,7 +34,7 @@ wilderController.findById = function (req, res, next) {
 
 wilderController.update = function (req, res, next) {
     WilderModel
-        .findOneAndUpdate({ _id: req.body._id }, req.body)
+        .findOneAndUpdate({ _id: req.params.id }, req.body)
         .then((result) => { res.json({ success: true, result: result }); })
         .catch((err) => {
             // res.send(err.message)
