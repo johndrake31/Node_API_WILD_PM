@@ -1,8 +1,9 @@
 const express = require('express');
+const router = express.Router();
 const wilderController = require('../controllers/wilders');
 const execAsyncHandler = require('../middleware/execAsyncHandler');
-const router = express.Router();
 
+//findOne
 router.get('/', execAsyncHandler(wilderController.readAll))
 router.get('/:id', execAsyncHandler(wilderController.findById))
 
