@@ -42,6 +42,11 @@ app.put('/api/wilders/:id', wilderController.updateById)
 //delete
 app.delete('/api/wilders/:id', wilderController.deleteById)
 
+app.use(
+    (req, res, next) => {
+        res.status(404).json({ message: "Route not found" })
+    })
+
 app.listen(4000, function () {
     console.log('Server started');
 });
