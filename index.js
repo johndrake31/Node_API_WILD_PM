@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const wilderController = require('./controllers/wilders');
-const execAsyncHandler = require('./middleware/errHandler')
 const app = express();
+const wilders = require('./routes/wilders');
+
 mongoose
     .connect("mongodb://127.0.0.1:27017/wilderdb", {
         autoIndex: true,
@@ -28,18 +28,10 @@ app.get('/', function (req, res, next) {
         `
     )
 })
-app.get('/api/wilders', execAsyncHandler(wilderController.readAll))
-app.get('/api/wilders/:id', execAsyncHandler(wilderController.findById))
 
-//create
-app.post('/api/wilders', execAsyncHandler(wilderController.create))
+app.use('api/wilders', wilders);
 
-//update
-app.put('/api/wilders/:id', execAsyncHandler(wilderController.updateById))
-
-//delete
-app.delete('/api/wilders/:id', execAsyncHandler(wilderController.deleteById))
-
+//error handling
 app.use(
     (err, req, res, next) => {
         res.status(500).json({ message: "Server Error" })

@@ -7,6 +7,7 @@ wilderController.create = async function (req, res, next) {
     const result = await newWilder.save();
     res.json(result);
 }
+
 wilderController.readAll = async function (req, res, next) {
     const wilder = await WilderModel.find();
     res.send(wilder);
