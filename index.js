@@ -1,9 +1,7 @@
-const http = require('http');
 const express = require('express');
 const mongoose = require('mongoose');
-const WilderModel = require('./models/Wilder');
 const wilderController = require('./controllers/wilders');
-
+const execAsyncHandler = require('./middleware/errHandler')
 const app = express();
 mongoose
     .connect("mongodb://127.0.0.1:27017/wilderdb", {
@@ -13,16 +11,16 @@ mongoose
     .catch((err) => console.log(err));
 app.use(express.json())
 
-//read
 
+//read
 app.get('/', function (req, res, next) {
     res.send(
         `
             <div width="400" height="400" style='padding: 25px; background-color: black'>
                 <h1 style="color:red">THIS IS AN API</h1>
-                <h2 style="color:white">Quelle est la couleur préférée d’un chat?</h2>
+                <h2 style="color:white">"Ecoute", dit la maman à sa petite fille,”si tu es sage, tu iras au ciel,et si tu n’es pas sage, tu iras en enfer."</h2>
                 <hr>
-                <h3 style="color:white">Le rrrrrouge.</h3>
+                <h3 style="color:white">"Et qu’est-ce que je dois faire pour aller au cirque?"</h3>
                 <br>
                 <br>
                 <br>
@@ -30,17 +28,22 @@ app.get('/', function (req, res, next) {
         `
     )
 })
-app.get('/api/wilders', wilderController.readAll)
-app.get('/api/wilders/:id', wilderController.findById)
+app.get('/api/wilders', execAsyncHandler(wilderController.readAll))
+app.get('/api/wilders/:id', execAsyncHandler(wilderController.findById))
 
 //create
-app.post('/api/wilders', wilderController.create)
+app.post('/api/wilders', execAsyncHandler(wilderController.create))
 
 //update
-app.put('/api/wilders/:id', wilderController.updateById)
+app.put('/api/wilders/:id', execAsyncHandler(wilderController.updateById))
 
 //delete
-app.delete('/api/wilders/:id', wilderController.deleteById)
+app.delete('/api/wilders/:id', execAsyncHandler(wilderController.deleteById))
+
+app.use(
+    (err, req, res, next) => {
+        res.status(500).json({ message: "Server Error" })
+    })
 
 app.use(
     (req, res, next) => {

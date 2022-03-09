@@ -1,56 +1,38 @@
 const WilderModel = require('./../models/Wilder');
 const wilderController = {}
 
-wilderController.create = function (req, res, next) {
-    const firstWilder = new WilderModel(req.body)
-    firstWilder
-        .save()
-        .then((result) => { res.json({ success: true, result: result }); })
-        .catch((err) => {
-            // res.send(err.message)
-            res.json({ success: false, result: err })
-        })
-
+wilderController.create = async function (req, res, next) {
+    await WilderModel.init()
+    const newWilder = new WilderModel(req.body)
+    const result = await newWilder.save();
+    res.json(result);
 }
-wilderController.readAll = function (req, res, next) {
-    WilderModel
-        .find()
-        .then((result) => { res.json({ success: true, result: result }); })
-        .catch((err) => {
-            // res.send(err.message)
-            res.json({ success: false, result: err })
-        })
+wilderController.readAll = async function (req, res, next) {
+    const wilder = await WilderModel.find();
+    res.send(wilder);
 }
 
-wilderController.findById = function (req, res, next) {
-    WilderModel
-        .findOne({ _id: req.params.id })
-        .then((result) => { res.json({ success: true, result: result }); })
-        .catch((err) => {
-            // res.send(err.message)
-            res.json({ success: false, result: err })
-        })
+wilderController.findById = async function (req, res, next) {
+    const wilder = await WilderModel.findOne({ _id: req.params.id });
+    res.send(wilder);
+    //CODE BEFORE
+    // WilderModel
+    //     .findOne({ _id: req.params.id })
+    //     .then((result) => { res.json({ success: true, result: result }); })
+    //     .catch((err) => {
+    //         // res.send(err.message)
+    //         next(err)
+    //     })
 }
 
-wilderController.updateById = function (req, res, next) {
-    WilderModel
-        .findOneAndUpdate({ _id: req.params.id }, req.body)
-        .then((result) => { res.json({ success: true, result: result }); })
-        .catch((err) => {
-            // res.send(err.message)
-            res.json({ success: false, result: err })
-        })
+wilderController.updateById = async function (req, res, next) {
+    const wilder = await WilderModel.findOneAndUpdate({ _id: req.params.id }, req.body)
+    res.send(wilder);
 }
 
-wilderController.deleteById = function (req, res, next) {
-
-    WilderModel
-        .deleteOne({ _id: req.params.id }, req.body)
-        .then((result) => { res.json({ success: true, result: result }); })
-        .catch((err) => {
-            // res.send(err.message)
-            res.json({ success: false, result: err })
-        })
+wilderController.deleteById = async function (req, res, next) {
+    const wilder = await WilderModel.deleteOne({ _id: req.params.id }, req.body)
+    res.send(wilder)
 }
 
 module.exports = wilderController;
