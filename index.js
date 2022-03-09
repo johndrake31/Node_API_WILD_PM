@@ -30,17 +30,17 @@ app.get('/', function (req, res, next) {
         `
     )
 })
-app.get('/api/wilder/users', wilderController.readAll)
-app.get('/api/wilder/user/:id', wilderController.findById)
+app.get('/api/wilders', wilderController.readAll)
+app.get('/api/wilders/:id', wilderController.findById)
 
 //create
-app.post('/api/wilder/user', wilderController.create)
+app.post('/api/wilders', wilderController.create)
 
 //update
-app.put('/api/wilder/user-update/:id', wilderController.update)
+app.put('/api/wilders/:id', wilderController.updateById)
 
 //delete
-app.delete('/api/wilder/user-delete/:id', wilderController.deleteById)
+app.delete('/api/wilders/:id', wilderController.deleteById)
 
 app.listen(4000, function () {
     console.log('Server started');
