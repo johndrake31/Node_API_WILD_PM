@@ -1,19 +1,23 @@
+import { NextFunction, Request, Response } from "express";
+import { IWilderCreate } from "../Interfaces/IWilder";
 const WilderModel = require('./../models/Wilder');
-const wilderController = {}
 
-wilderController.create = async function (req, res, next) {
+const wilderController = {
+
+
+create: async (req: Request, res:Response<IWilderCreate>, next: NextFunction) =>{
     await WilderModel.init()
     const newWilder = new WilderModel(req.body)
     const result = await newWilder.save();
     res.json(result);
-}
+},
 
-wilderController.readAll = async function (req, res, next) {
+readAll: async function (req: Request, res:Response, next: NextFunction) {
     const wilder = await WilderModel.find();
     res.send(wilder);
-}
+},
 
-wilderController.findById = async function (req, res, next) {
+findById: async function (req:Request, res:Response, next: NextFunction) {
     const wilder = await WilderModel.findOne({ _id: req.params.id });
     res.send(wilder);
     //CODE BEFORE
@@ -24,16 +28,16 @@ wilderController.findById = async function (req, res, next) {
     //         // res.send(err.message)
     //         next(err)
     //     })
-}
+},
 
-wilderController.updateById = async function (req, res, next) {
+updateById: async function (req: Request, res: Response, next:NextFunction) {
     const wilder = await WilderModel.findOneAndUpdate({ _id: req.params.id }, req.body)
     res.send(wilder);
-}
+},
 
-wilderController.deleteById = async function (req, res, next) {
+deleteById: async function (req: Request, res:Response, next:NextFunction) {
     const wilder = await WilderModel.deleteOne({ _id: req.params.id }, req.body)
     res.send(wilder)
+},
 }
-
 module.exports = wilderController;

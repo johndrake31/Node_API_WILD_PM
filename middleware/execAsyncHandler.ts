@@ -1,5 +1,6 @@
-function execAsyncHandler(handler){
-    return async function (req, res, next) {
+import { NextFunction, Request, Response } from "express";
+function execAsyncHandler(handler: any){
+    return async function (req: Request, res: Response, next: NextFunction) {
         try {
             await handler(req, res, next)
         } catch (err) {

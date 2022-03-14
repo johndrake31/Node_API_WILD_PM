@@ -1,8 +1,8 @@
-const express = require('express');
+import { Router, NextFunction,Request, Response } from "express";
 const execAsyncHandler = require('../middleware/execAsyncHandler');
-const router = express.Router();
+const router = Router();
 
-router.get('/', execAsyncHandler(function (req, res, next) {
+router.get('/', execAsyncHandler(function (req: Request, res: Response, next: NextFunction) {
     res.send(
         `
             <div width="400" height="400" style='padding: 25px; background-color: black'>
