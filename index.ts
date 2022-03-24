@@ -1,8 +1,10 @@
 import express, {NextFunction, Request, Response} from 'express'
 import mongoose from 'mongoose';
 const app = express();
+const cors = require('cors');
 const wilders = require('./routes/wilders');
 const home = require('./routes/home');
+
 
 mongoose
     .connect("mongodb://127.0.0.1:27017/wilderdb", {
@@ -12,18 +14,7 @@ mongoose
     .catch((err: Error) => console.log(err));
 
 app.use(express.json())
-app.use((req: Request, res: Response, next:NextFunction) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader(
-      'Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    );
-    res.setHeader(
-      'Access-Control-Allow-Methods',
-      'GET, POST, PATCH, PUT, DELETE, OPTIONS'
-    );
-    next();
-  });
+app.use(cors());
 
 //read
 
@@ -44,5 +35,5 @@ app.use(
     })
 
 app.listen(4000, function () {
-    console.log('Server started');
+    console.log('Server started at port 4000');
 });
