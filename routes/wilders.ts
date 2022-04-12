@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router();
 
-const wilderController = require('../controllers/wilders');
-const execAsyncHandler = require('../middleware/execAsyncHandler');
+import  wilderController from '../controllers/wilders';
+import execAsyncHandler from '../middleware/execAsyncHandler';
 
 //findOne
 router.get('/', execAsyncHandler(wilderController.readAll))
@@ -18,4 +18,4 @@ router.put('/:id', execAsyncHandler(wilderController.updateById))
 //delete
 router.delete('/:id', execAsyncHandler(wilderController.deleteById))
 
-module.exports = router;
+export default router;

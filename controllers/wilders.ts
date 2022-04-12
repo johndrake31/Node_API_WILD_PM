@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { IWilderCreate, IWilder } from "../Interfaces/IWilder";
-const WilderModel = require('./../models/Wilder');
+import WilderModel from './../models/Wilder';
 
 
 const wilderController = {

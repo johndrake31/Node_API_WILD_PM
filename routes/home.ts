@@ -1,5 +1,5 @@
 import { Router, NextFunction,Request, Response } from "express";
-const execAsyncHandler = require('../middleware/execAsyncHandler');
+import  execAsyncHandler from '../middleware/execAsyncHandler';
 const router = Router();
 
 router.get('/', execAsyncHandler(function (req: Request, res: Response, next: NextFunction) {
@@ -18,4 +18,4 @@ router.get('/', execAsyncHandler(function (req: Request, res: Response, next: Ne
     )
 }))
 
-module.exports = router;
+export default router;

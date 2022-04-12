@@ -1,9 +1,9 @@
 import express, {NextFunction, Request, Response} from 'express'
 import mongoose from 'mongoose';
 const app = express();
-const cors = require('cors');
-const wilders = require('./routes/wilders');
-const home = require('./routes/home');
+import cors from 'cors';
+import wilders from './routes/wilders';
+import home from './routes/home';
 
 
 mongoose

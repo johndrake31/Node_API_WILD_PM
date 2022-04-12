@@ -13,4 +13,4 @@ function execAsyncHandler(handler: Function): RequestHandler {
     }
 }
 
-module.exports = execAsyncHandler;
+export default execAsyncHandler;
